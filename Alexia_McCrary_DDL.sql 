@@ -1,0 +1,31 @@
+SELECT * FROM COUNTRY_STATISTICS;
+
+CREATE VIEW vw_Country_Statistics AS
+SELECT 
+    cs.Statistic_ID,
+    c.Country_Name,
+    co.Continent_Name,
+    y.Year_Value,
+    cs.Population,
+    cs.GDP_USD
+FROM COUNTRY_STATISTICS cs
+LEFT JOIN COUNTRY c ON cs.Country_ID = c.Country_ID
+LEFT JOIN CONTINENT co ON c.Continent_ID = co.Continent_ID
+LEFT JOIN YEAR y ON cs.Year_ID = y.Year_ID;
+
+SELECT * FROM vw_Country_Statistics;
+
+
+-- I didnt realize there needed to be a certain name as the view
+CREATE OR REPLACE VIEW vw_ALL AS
+SELECT 
+    cs.Statistic_ID,
+    c.Country_Name AS Country,
+    co.Continent_Name AS Continent,
+    y.Year_Value AS Year,
+    cs.Population,
+    cs.GDP_USD
+FROM COUNTRY_STATISTICS cs
+LEFT JOIN COUNTRY c ON cs.Country_ID = c.Country_ID
+LEFT JOIN CONTINENT co ON c.Continent_ID = co.Continent_ID
+LEFT JOIN YEAR y ON cs.Year_ID = y.Year_ID;
